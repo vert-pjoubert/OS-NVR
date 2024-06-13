@@ -196,7 +196,7 @@ func newApp(envPath string, wg *sync.WaitGroup, hooks *hookList) (*App, error) {
 
 	// Register the OAuth2 callback route if the authentication method is OAuth2
 	if strings.ToLower(env.AuthMethod) == "oauth2" {
-		registerOAuth2Callback(router, a, env)
+		registerOAuth2Callback(router, a)
 	}
 
 	router.Handle("/live", a.User(t.Render("live.tpl")))

@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"nvr/pkg/storage"
 	"nvr/pkg/web/auth"
 
 	"golang.org/x/oauth2"
@@ -17,7 +16,7 @@ type OAuth2Authenticator interface {
 }
 
 // registerOAuth2Callback registers the OAuth2 callback route
-func registerOAuth2Callback(router *http.ServeMux, a auth.Authenticator, env *storage.ConfigEnv) {
+func registerOAuth2Callback(router *http.ServeMux, a auth.Authenticator) {
 	router.HandleFunc("/oauth2/callback", func(w http.ResponseWriter, r *http.Request) {
 		code := r.URL.Query().Get("code")
 		if code == "" {
