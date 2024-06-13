@@ -287,6 +287,14 @@ type ConfigEnv struct {
 
 	HomeDir   string `yaml:"homeDir"`
 	ConfigDir string
+
+	AuthMethod   string `yaml:"authMethod"`
+	ClientID     string `yaml:"clientID,omitempty"`
+	ClientSecret string `yaml:"clientSecret,omitempty"`
+	AuthURL      string `yaml:"authURL,omitempty"`
+	TokenURL     string `yaml:"tokenURL,omitempty"`
+	RedirectURL  string `yaml:"redirectURL,omitempty"`
+	UserInfoURL  string `yaml:"userInfoURL,omitempty"`
 }
 
 // ErrPathNotAbsolute path is not absolute.
