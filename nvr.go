@@ -21,6 +21,7 @@ import (
 	"os/signal"
 	"path/filepath"
 	"strconv"
+	"strings"
 	"sync"
 	"syscall"
 	"time"
@@ -192,6 +193,11 @@ func newApp(envPath string, wg *sync.WaitGroup, hooks *hookList) (*App, error) {
 
 	// Routes.
 	router := http.NewServeMux()
+
+	// Register the OAuth2 callback route if the authentication method is OAuth2
+	if strings.ToLower(env.AuthMethod) == "oauth2" {
+		registerOAuth2Callback(router, a, env)
+	}
 
 	router.Handle("/live", a.User(t.Render("live.tpl")))
 	router.Handle("/recordings", a.User(t.Render("recordings.tpl")))
